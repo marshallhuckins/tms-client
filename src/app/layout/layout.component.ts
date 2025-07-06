@@ -21,7 +21,7 @@ template: `
 
 <!-- Navigation -->
 <nav class="sidebar">
-<!-- routerLinkActiveOptions with exact: true , means the active class is only applied when the URL matatches the link  
+<!-- routerLinkActiveOptions with exact: true , means the active class is only applied when the URL matches the link
  Applied on side navigation for the active page-->
 <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
 <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
@@ -44,6 +44,7 @@ template: `
  <div class="sub-menu" *ngIf="isTasksMenuOpen">
   <a routerLink="/tasks/create" routerLinkActive="active" >Create Tasks</a>
   <a routerLink="/tasks/manage" routerLinkActive="active" >Manage Tasks</a>
+  <a routerLink="/tasks/list" routerLinkActive="active">List All Tasks</a>
  </div>
 </div>
 
@@ -53,7 +54,7 @@ template: `
 <!--  Content window-->
 <section class="content-window">
 <router-outlet></router-outlet> <!-- Content from ...component.ts will appear-->
-</section> 
+</section>
 
 </div> <!--End of main-content-->
 
@@ -68,57 +69,57 @@ template: `
 
 `,
 styles: `
-.container { 
-  display: flex; 
-  flex-direction: column; 
-  height: 100vh; 
-} 
- 
-.header, .footer { 
-  background-color: #3f51b5; 
-  color: white; 
-  padding: 1rem; 
-  text-align: center; 
-} 
- 
-.main-content { 
-  display: flex; 
-  flex: 1; 
-  min-height: 0; /* For proper flex behavior */ 
-} 
- 
-.content-window { 
-  flex: 1; 
-  padding: 1rem; 
-  overflow-y: auto; 
-} 
- 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header, .footer {
+  background-color: #3f51b5;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  min-height: 0; /* For proper flex behavior */
+}
+
+.content-window {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
 /* Navigation styles*/
-.sidebar { 
-  width: 200px; 
-  background-color: #f4f4f4; 
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-} 
+}
 
-.sidebar a{ 
+.sidebar a{
   display: block;
   padding: 10px 15px;
   margin-bottom: 10px;
   text-decoration: none;
   color: #333;
-} 
-.sidebar a:hover{ 
+}
+.sidebar a:hover{
   background-color: #3f51b5;
   color: #fff;
-} 
-.sidebar a.active { 
+}
+.sidebar a.active {
   background-color: #3f51b5;
   color: #fff;
-} 
+}
 
 .sidebar .sub-menu{
   padding-left: 15px;

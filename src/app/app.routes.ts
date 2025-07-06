@@ -9,6 +9,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { CreateProjectComponent } from './projects/create-project/create-project.component';
 import { ManageProjectComponent } from './projects/manage-project/manage-project.component';
 import { ListTasksComponent } from './components/list-tasks/list-tasks.component';
+import { ReadTaskComponent } from './tasks/read-task/read-task.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
           { path: 'create', component: CreateTaskComponent },
           { path: 'manage', component: ManageTaskComponent },
           { path: 'list', component: ListTasksComponent },
+          { path: 'tasks/view/:id', component: ReadTaskComponent },
           { path: '', redirectTo: 'create', pathMatch: 'full' }
         ]
       },

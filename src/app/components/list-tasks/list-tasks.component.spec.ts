@@ -34,13 +34,15 @@ describe('ListTasksComponent', () => {
     }
   ];
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [ListTasksComponent],
-      providers: [TaskService]
+    beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        ListTasksComponent
+      ]
     }).compileComponents();
-  }));
+  });
+
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListTasksComponent);

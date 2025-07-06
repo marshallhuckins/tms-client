@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterModule],
   template: `
     <div class="container">
       <header>
@@ -12,7 +12,8 @@ import { RouterOutlet } from '@angular/router';
       </header>
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/tasks">Tasks</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>

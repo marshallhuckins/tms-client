@@ -7,7 +7,7 @@ import { ManageTaskComponent } from './tasks/manage-task/manage-task.component';
 import { CreateProjectComponent } from './projects/create-project/create-project.component';
 import { ManageProjectComponent } from './projects/manage-project/manage-project.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { ProjectsComponent } from './projects/projects.component';
 
 
  
@@ -47,18 +47,3 @@ children:[
 ] 
 }
 ];
-/*{
-        path: 'user-management',
-        component: UserManagementComponent,
-        children: userManagementRoutes
-      },
-      {
-        path: 'reports/sales',
-        component: SalesComponent,
-        children: salesReportRoutes
-      },
-      {
-        path: 'reports/agent-performance',
-        component: AgentPerformanceComponent,
-        children: agentPerformanceRoutes
-      }, */

@@ -1,11 +1,38 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TasksService } from './tasks/tasks.service';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let httpMock: HttpTestingController;
+
+
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent,
+         ReactiveFormsModule,
+        HttpClientTestingModule,
+      ],
+ providers: [TasksService],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should create the app', () => {
@@ -20,10 +47,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('tms-client');
   });
 
-  it('should render title', () => {
+  it('should render the router outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome to the MEAN Stack Starter Project');
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });

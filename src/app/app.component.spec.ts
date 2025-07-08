@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TasksService } from './tasks/tasks.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -18,6 +19,7 @@ describe('AppComponent', () => {
         HttpClientTestingModule,
       ],
  providers: [TasksService],
+     
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

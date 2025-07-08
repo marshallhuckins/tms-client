@@ -188,6 +188,7 @@ export class CreateTaskComponent implements OnInit {
       projectId: Number(this.taskForm.value.projectId)
     };
 
+    //TODO: update to environment file instead of harding url 
     this.http.post<any>('http://localhost:3000/api/task', newTask).subscribe({
       next: (createdTask) => {
         this.successMessage = `Task "${newTask.title}" created successfully!`;

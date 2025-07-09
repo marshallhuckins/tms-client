@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ListTasksComponent } from './list-tasks.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TaskService, Task } from '../../services/task.service';
+import { TasksService , Task} from '../tasks.service';
 import { of, throwError } from 'rxjs';
 
 describe('ListTasksComponent', () => {
   let component: ListTasksComponent;
   let fixture: ComponentFixture<ListTasksComponent>;
-  let taskService: TaskService;
+  let taskService: TasksService;
 
   const mockTasks: Task[] = [
     {
@@ -36,16 +36,16 @@ describe('ListTasksComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [ListTasksComponent],
-      providers: [TaskService]
+      imports: [ListTasksComponent,HttpClientTestingModule],//ListTasksComponent is standalone, so import directly into imports
+    //  declarations: [ListTasksComponent],
+      providers: [TasksService]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListTasksComponent);
     component = fixture.componentInstance;
-    taskService = TestBed.inject(TaskService);
+    taskService = TestBed.inject(TasksService);
   });
 
   it('should create the component', () => {
@@ -55,7 +55,8 @@ describe('ListTasksComponent', () => {
   it('should fetch tasks successfully on init', () => {
     spyOn(taskService, 'getTasks').and.returnValue(of(mockTasks));
 
-    component.ngOnInit();
+   component.ngOnInit();
+
 
     expect(taskService.getTasks).toHaveBeenCalled();
     expect(component.tasks.length).toBe(2);
@@ -66,6 +67,7 @@ describe('ListTasksComponent', () => {
     const consoleSpy = spyOn(console, 'error');
     spyOn(taskService, 'getTasks').and.returnValue(throwError(() => new Error('Server error')));
 
+    
     component.ngOnInit();
 
     expect(taskService.getTasks).toHaveBeenCalled();

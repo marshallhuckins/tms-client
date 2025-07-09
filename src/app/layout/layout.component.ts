@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet, RouterLink, NavigationEnd, Router } from '@angular/router';
 import { RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { filter } from 'rxjs';
 
 @Component({
 selector: 'app-layout',
@@ -38,10 +39,11 @@ template: `
 
 
 <div>
-<!--<a routerLink="/tasks" routerLinkActive="active" >Tasks</a>-->
+
 <a (click)="toggleTasksMenu()" style="cursor:pointer;" routerLink="/tasks" routerLinkActive="active" >Tasks</a>
 <!-- Sub navigation for Tasks -->
  <div class="sub-menu" *ngIf="isTasksMenuOpen">
+  <a routerLink="/tasks/list" routerLinkActive="active" >List Tasks</a>
   <a routerLink="/tasks/create" routerLinkActive="active" >Create Tasks</a>
   <a routerLink="/tasks/manage" routerLinkActive="active" >Manage Tasks</a>
  </div>
@@ -130,19 +132,28 @@ styles: `
 }
 `
 })
-export class LayoutComponent {
- //Track if the submenu for Tasks is expanded
+
+export class LayoutComponent implements OnInit {
   isTasksMenuOpen = false;
+  isProjectsMenuOpen = false;
+  showTopTaskList = true;
+
+  constructor(private router: Router) {}
 
   toggleTasksMenu() {
     this.isTasksMenuOpen = !this.isTasksMenuOpen;
   }
 
-  //Track if the submenu for Projects is expanded
-  isProjectsMenuOpen = false;
-
   toggleProjectsMenu() {
     this.isProjectsMenuOpen = !this.isProjectsMenuOpen;
   }
 
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+   
+      this.showTopTaskList = !event.urlAfterRedirects.includes('/tasks/list');
+    });
+  }
 }

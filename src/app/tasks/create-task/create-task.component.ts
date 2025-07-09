@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-create-task',
@@ -182,15 +183,14 @@ export class CreateTaskComponent implements OnInit {
       return;
     }
 
-    // Convert projectId string to number
+    // Convert projectId string to number ,// Convert projectId from string to number
     const newTask = {
-      ...this.taskForm.value,
-      projectId: Number(this.taskForm.value.projectId)
+      ...this.taskForm.value,// Copy all properties from the form
+      projectId: Number(this.taskForm.value.projectId) //convert projectID from string to number
     };
 
-    //TODO: update to environment file instead of harding url 
-    this.http.post<any>('http://localhost:3000/api/task', newTask).subscribe({
-      next: (createdTask) => {
+ this.http.post(`${environment.apiBaseUrl}/api/task`, newTask).subscribe({     
+   next: (createdTask) => {
         this.successMessage = `Task "${newTask.title}" created successfully!`;
         this.errorMessage = null;
 
